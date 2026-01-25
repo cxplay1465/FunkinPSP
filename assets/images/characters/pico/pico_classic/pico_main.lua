@@ -6,7 +6,7 @@
 -- Масштаб изображения: 0.1250
 -- Экспортировано спрайтов: 15
 
-pico_main = {
+local frames = {
     -- Note Down
     ["pico_note_down_01"] = {0, 0, 92, 49},
     ["pico_note_down_02"] = {92, 0, 92, 49},
@@ -32,3 +32,5 @@ pico_main = {
     ["pico_note_up_01"] = {116, 180, 54, 61},
     ["pico_note_up_02"] = {170, 180, 54, 61}
 }
+
+return {frames = frames}

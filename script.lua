@@ -3,7 +3,6 @@
 -- ======= by CXPLAY btw =======
 -- =============================
 
-local USGAPI = require("libs/USGAPI")
-
 -- запуск начального экрана хехе
-dofile("assets/data/scenes/titel.lua")
+System.GC() -- очистка мусора (необязательно)
+dofile("assets/data/scenes/testsonly_DELETEONRELEASE/stagetest.lua") -- загрузка экрана с интро текстом и танцующей гф хехе)
