@@ -20,7 +20,7 @@ animations.init = function (x, y, size, bpm)
     animations.idle = anim.playfromatlas(
         images.main,
         x, y,
-        0, 0, size,
+        size,
         color_white,
         sheets.idle.frames,
         true,
@@ -33,7 +33,7 @@ animations.init = function (x, y, size, bpm)
     animations.left = anim.playfromatlas(
         images.main,
         x, y,
-        -5, 0, size,
+        size,
         color_white,
         sheets.left.frames,
         true,
@@ -46,7 +46,7 @@ animations.init = function (x, y, size, bpm)
     animations.right = anim.playfromatlas(
         images.main,
         x, y,
-        5, 0, size,
+        size,
         color_white,
         sheets.right.frames,
         true,
@@ -59,7 +59,7 @@ animations.init = function (x, y, size, bpm)
     animations.up = anim.playfromatlas(
         images.main,
         x, y,
-        0, 5, size,
+        size,
         color_white,
         sheets.main.frames,
         true,
@@ -72,7 +72,7 @@ animations.init = function (x, y, size, bpm)
     animations.down = anim.playfromatlas(
         images.main,
         x, y,
-        0, 0, size,
+        size,
         color_white,
         sheets.main.frames,
         true,
@@ -85,7 +85,7 @@ animations.init = function (x, y, size, bpm)
     animations.hey = anim.playfromatlas(
         images.main,
         x, y,
-        0, 0, size,
+        size,
         color_white,
         sheets.main.frames,
         false,
@@ -98,7 +98,7 @@ animations.init = function (x, y, size, bpm)
     animations.missdown = anim.playfromatlas(
         images.miss,
         x, y,
-        0, 0, size,
+        size,
         color_white,
         sheets.idle.frames,
         false,
@@ -111,7 +111,7 @@ animations.init = function (x, y, size, bpm)
     animations.missleft = anim.playfromatlas(
         images.main,
         x, y,
-        0, 0, size,
+        size,
         color_white,
         sheets.idle.frames,
         false,
@@ -124,7 +124,7 @@ animations.init = function (x, y, size, bpm)
     animations.missup = anim.playfromatlas(
         images.main,
         x, y,
-        0, 0, size,
+        size,
         color_white,
         sheets.idle.frames,
         false,
@@ -137,7 +137,7 @@ animations.init = function (x, y, size, bpm)
     animations.missright = anim.playfromatlas(
         images.main,
         x, y,
-        64, 90, size,
+        size,
         color_white,
         sheets.idle.frames,
         false,
@@ -150,7 +150,7 @@ animations.init = function (x, y, size, bpm)
     animations.deathstart = anim.playfromatlas(
         images.death_start,
         x, y,
-        64, 90, size,
+        size,
         color_white,
         sheets.idle.frames,
         false,
@@ -163,7 +163,7 @@ animations.init = function (x, y, size, bpm)
     animations.deathloop = anim.playfromatlas(
         images.death_start,
         x, y,
-        64, 90, size,
+        size,
         color_white,
         sheets.idle.frames,
         true,

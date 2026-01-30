@@ -11,7 +11,7 @@ local animation = {
 
 local color_white = Color.new(255,255,255)
 
-function animation.playfromatlas(image, x, y, offsetx, offsety, size, color, frames, islooping, firstframeid, lastframeid, bpm, speed, beatframeid)
+function animation.playfromatlas(image, x, y, size, color, frames, islooping, firstframeid, lastframeid, bpm, speed, beatframeid)
     -- Безопасная проверка параметров
     if not image then
         print("ERROR: image is nil!")
@@ -79,7 +79,7 @@ function animation.playfromatlas(image, x, y, offsetx, offsety, size, color, fra
     elseif speed and speed > 0 then
         frameDuration = speed * 1000
     end
-    
+
     -- Создаем инстанс анимации
     local instance = {
         image = image,
@@ -91,8 +91,6 @@ function animation.playfromatlas(image, x, y, offsetx, offsety, size, color, fra
         isLooping = (islooping ~= false),
         x = x or 0,
         y = y or 0,
-        offsetx = offsetx or 0,
-        offsety = offsety or 0,
         size = size or 1,
         color = color or Color.new(255, 255, 255),
         totalFrames = frameCount,
@@ -215,19 +213,37 @@ function animation.draw(instance)
         return
     end
     
-    Image.draw(
-        instance.image,
-        instance.x,
-        instance.y,
-        frame.width * instance.size,
-        frame.height * instance.size,
-        instance.color,
-        frame.x + instance.offsetx,
-        frame.y + instance.offsety,
-        frame.width,
-        frame.height,
-        0, 255, Image.Center
-    )
+    if frame[5] == nil then
+        Image.draw(
+            instance.image,
+            instance.x,
+            instance.y,
+            frame.width * instance.size,
+            frame.height * instance.size,
+            instance.color,
+            frame.x,
+            frame.y,
+            frame.width,
+            frame.height,
+            0, 255, Image.Center
+        )
+    else
+        local offsetx = frame[7] - frame[3]
+        local offsety = frame[8] - frame[4]
+        Image.draw(
+            instance.image,
+            instance.x - offsetx,
+            instance.y - offsety,
+            frame.width * instance.size,
+            frame.height * instance.size,
+            instance.color,
+            frame.x,
+            frame.y,
+            frame.width,
+            frame.height,
+            0, 255, Image.Center
+        )
+    end
 end
 
 -- Очистка с защитой
@@ -268,6 +284,14 @@ function animation.clearImageCache()
         end
     end
     animation.textureCache = {}
+end
+
+function animation.getCurrentFrameID(instance)
+    if instance == nil then
+        return false
+    end
+
+    return instance.currentFrame
 end
 
 return animation

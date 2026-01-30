@@ -9,6 +9,7 @@
 local anim = require("libs.animation") -- библиотека для анимаций
 local fade = require("libs.fade")
 local transition = require("libs.transition")
+local debug = require("libs.debug")
 local color_white = Color.new(255, 255, 255) -- Базовый белый цвет
 
 local whitecube = Image.load("assets/images/white.png")
@@ -34,7 +35,7 @@ local randomphrases = {
     {"BETTER THAN PSX VERSION", "MAYBE OR", "MAYBE NOT"},
     {"THX TO KODILO FOR", "LUAPLAYER YT", ""},
     {"PICO FUNNY", "PICO FUNNY", ""},
-    {"DID YOU KNOW DEAD SEA?", "I KILLED HIM", ""},
+    {"DID YOU KNOW DEAD SEA?", "I KILLED IT", ""},
     {"DONT PLAY RUST", "WE ONLY FUNKIN", ""},
     {"NEWGROUNDS", "FOREVER", ""},
     {"VPN IN RUSSIAN", "NOT FOREVER", ""},
@@ -46,11 +47,14 @@ local randomphrases = {
     {"THIS IS A GODDAWN PROTOTYPE", "WE WORKING ON IT", ""},
     {"PRESS SQUARE", "TO OPEN POPUP", "(SERIOUSLY DO IT)"},
     {"IM TOO LAZY TO", "ADD MORE PHRASES", ""},
-    {"ERROR:", "KID JOINED THE GAME", ""}
+    {"ERROR:", "KID JOINED THE GAME", ""},
+    {"BETTER HAVE A FRIEND", "THAN EACH OTHER"},
+    {"LESS PIXELS", "LESS SIZE", "ONLY 32MB OF RAM"},
+    {"IM A RAPER", "HE SAID IT WITHOUT P, DID HE?", ""}
 }
 
 -- Выбранная с помощью рандома фраза из таблицы randomphrases
-local selectedrandomphrase = LUA.getRandom(1, 27)
+local selectedrandomphrase = 30
 
 -- Изображение логотипа NewGrounds
 local nglogo = Image.load("assets/images/tankman_nglogo.png")
@@ -67,9 +71,6 @@ local presslua = require("assets.images.menu.titel.pressf")
 local logoimg = Image.load("assets/images/logobumpin.png")
 local logolua = require("assets.images.logobumpin")
 
-local randomtext = {
-    ["1"] = {"DOBAVLY TEXTA SYDA POSZHE"}
-}
 --#endregion
 
 --#region ФОНОВАЯ МУЗЫКА
@@ -102,7 +103,7 @@ local currentscreenstate = 0 -- 0 - silent, 1 - transition
 pressenteranims.idle = anim.playfromatlas(
     pressimg,
     240, 250,
-    0, 0, 1.7,
+    1.7,
     color_white,
     presslua.frames,
     true,
@@ -114,7 +115,7 @@ pressenteranims.idle = anim.playfromatlas(
 pressenteranims.pressed = anim.playfromatlas(
     pressimg,
     240, 240,
-    0, 0, 1.7,
+    1.7,
     color_white,
     presslua.frames,
     false,
@@ -129,8 +130,8 @@ pressenteranims.pressed = anim.playfromatlas(
 
 local gfdancinAnim = anim.playfromatlas(
     gfimg,
-    350, 165,
-    0, 0, 2.5,
+    360, 165,
+    2.3,
     color_white,
     gflua.frames,
     true,
@@ -146,7 +147,7 @@ local gfdancinAnim = anim.playfromatlas(
 local logoAnim = anim.playfromatlas(
     logoimg,
     125, 100,
-    0, 0, 1.6,
+    1.6,
     color_white,
     logolua.frames,
     true,
@@ -178,7 +179,7 @@ local function splashtext(newgroundstext, ngimage, devstext, randomtext)
     
     if currentsong.currentbeat >= 7 and currentsong.currentbeat < 8 then
         intraFont.print(240, 89, newgroundstext[2], color_white, funkinfont, 1, 0, false, intraFont.ALIGN_CENTER)
-        Image.draw(ngimage, 240, 195, 128, 128, color_white, 0, 0, 181, 175, 0, 255, Image.Center)
+        Image.draw(ngimage, 240, 195, 128, 128, color_white, 181, 175, 0, 255, Image.Center)
     end
 
     if randomtext[selectedrandomphrase][3] == "" or randomtext[selectedrandomphrase][3] == nil then
@@ -300,9 +301,9 @@ while true do
     sound.play(sound.WAV_1, currentsong.looped)
 
     -- Информация для дебага (по умолчанию - отключить)
-    LUA.print(0, 0, tostring(currentsong.currentbeat))
-    LUA.print(0, 15, tostring(timer.time(beattimer)))
-    LUA.print(0, 30, tostring(LUA.getRAM() / 1048576))
+    debug.drawinfo("FUNKIN ENGINE")
+    debug.drawinfo(tostring(currentsong.currentbeat))
+    debug.drawinfo(tostring(debug.RAM()))
 
     if currentscreenstate == 1 then
         local beforesceneswith = timer.create()

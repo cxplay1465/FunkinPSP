@@ -3,11 +3,13 @@
 -- ======= by CXPLAY btw =======
 -- =============================
 
---#region МЕТОДЫ
+-- #region ПЕРЕМЕННЫЕ И БИБЛИОТЕКИ
 
-local function debugInfo()
-    LUA.print(0, 0, tostring(LUA.getRAM() / 1048576))
-end
+debug = require("libs.debug")
+
+--#endregion
+
+--#region МЕТОДЫ
 
 --#endregion
 
@@ -16,8 +18,11 @@ end
 while true do
     screen.clear()
     buttons.read()
+    debug.update()
 
-    debugInfo()
+    debug.drawinfo("DEBUG: ")
+    debug.drawinfo("RAM: " .. tostring(debug.RAM()))
+
 
     screen.flip()
 end

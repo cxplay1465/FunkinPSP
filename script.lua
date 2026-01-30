@@ -5,4 +5,4 @@
 
 -- запуск начального экрана хехе
 System.GC() -- очистка мусора (необязательно)
-dofile("assets/data/scenes/testsonly_DELETEONRELEASE/stagetest.lua") -- загрузка экрана с интро текстом и танцующей гф хехе)
+dofile("assets/data/scenes/testsonly_DELETEONRELEASE/titel_indiecross.lua") -- загрузка экрана с интро текстом и танцующей гф хехе)
