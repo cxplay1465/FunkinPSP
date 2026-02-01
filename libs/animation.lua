@@ -11,6 +11,8 @@ local animation = {
 
 local color_white = Color.new(255,255,255)
 
+local api = require("libs.api")
+
 function animation.playfromatlas(image, x, y, size, color, frames, islooping, firstframeid, lastframeid, bpm, speed, beatframeid)
     -- Безопасная проверка параметров
     if not image then
@@ -212,38 +214,23 @@ function animation.draw(instance)
     if not frame then
         return
     end
+
+    --[[Image.draw(
+        instance.image,
+        instance.x,
+        instance.y,
+        frame.width * instance.size,
+        frame.height * instance.size,
+        instance.color,
+        frame.x,
+        frame.y,
+        frame.width,
+        frame.height,
+        0, 255, Image.Center
+    )]]
     
-    if frame[5] == nil then
-        Image.draw(
-            instance.image,
-            instance.x,
-            instance.y,
-            frame.width * instance.size,
-            frame.height * instance.size,
-            instance.color,
-            frame.x,
-            frame.y,
-            frame.width,
-            frame.height,
-            0, 255, Image.Center
-        )
-    else
-        local offsetx = frame[7] - frame[3]
-        local offsety = frame[8] - frame[4]
-        Image.draw(
-            instance.image,
-            instance.x - offsetx,
-            instance.y - offsety,
-            frame.width * instance.size,
-            frame.height * instance.size,
-            instance.color,
-            frame.x,
-            frame.y,
-            frame.width,
-            frame.height,
-            0, 255, Image.Center
-        )
-    end
+    api.draw(instance.image, instance.x, instance.y, 0, instance.size, instance.color, frame.x, frame.y, frame.width, frame.height, false)
+    
 end
 
 -- Очистка с защитой
